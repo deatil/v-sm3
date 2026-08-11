@@ -1,6 +1,6 @@
-## V-SM3 
+## V-sm3 
 
-v-sm3 is a SM3 hash function for vlang.
+A SM3 hash function for vlang.
 
 
 ### Env
@@ -32,6 +32,8 @@ import deatil.sm3
 ### Get Starting
 
 ~~~v
+module main
+
 import deatil.sm3
 
 fn main() {
