@@ -35,7 +35,7 @@ import deatil.sm3
 import deatil.sm3
 
 fn main() {
-    mut d := new()
+    mut d := sm3.new()
     d.write("abc".bytes()) or { panic(err) }
     out := d.sum([])
     
