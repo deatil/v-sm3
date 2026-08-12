@@ -69,12 +69,12 @@ pub fn new() &Digest {
 	return d
 }
 
-// write writes the contents of `p_` to the internal hash representation.
+// write writes the contents of `b` to the internal hash representation.
 pub fn (mut d Digest) write(b []u8) !int {
 	unsafe {
 		nn := b.len
 		
-		off := 0
+		mut off := 0
 
         // Partial buffer exists from previous update. Copy into buffer then hash.
         if d.nx != 0 && d.nx + b.len >= 64 {
