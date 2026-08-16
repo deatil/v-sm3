@@ -10,7 +10,7 @@ fn test_streaming() {
 
 	{
 		mut d := new()
-		d.write("abc".bytes()) or { panic(err) }
+		d.write("abc".bytes())!
 		out := d.sum([])
 
 		assert "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0" == out.hex()
@@ -18,9 +18,9 @@ fn test_streaming() {
 
 	{
 		mut d := new()
-		d.write("a".bytes()) or { panic(err) }
-		d.write("b".bytes()) or { panic(err) }
-		d.write("c".bytes()) or { panic(err) }
+		d.write("a".bytes())!
+		d.write("b".bytes())!
+		d.write("c".bytes())!
 		out := d.sum([])
 
 		assert "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0" == out.hex()
@@ -62,4 +62,18 @@ fn test_hexhash2() {
 	out := hexhash("V")
 
 	assert "061e4f59bd1c9bcb58c0fe01b20ecde99b4fccee7fc495697dc811152d479345" == out
+}
+
+fn test_reset() {
+	mut d := new()
+	d.write("abc".bytes())!
+	out := d.sum([])
+
+	assert "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0" == out.hex()
+
+	d.reset()
+	d.write("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".bytes())!
+	out2 := d.sum([])
+
+	assert "2971d10c8842b70c979e55063480c50bacffd90e98e2e60d2512ab8abfdfcec5" == out2.hex()
 }

@@ -7,14 +7,10 @@ pub const size = 32
 // The blocksize of SM3 in bytes.
 pub const block_size = 64
 
-const init0 = u32(0x7380166f)
-const init1 = u32(0x4914b2b9)
-const init2 = u32(0x172442d7)
-const init3 = u32(0xda8a0600)
-const init4 = u32(0xa96f30bc)
-const init5 = u32(0x163138aa)
-const init6 = u32(0xe38dee4d)
-const init7 = u32(0xb0fb0e4e)
+const init_box = [
+	u32(0x7380166f), 0x4914b2b9, 0x172442d7, 0xda8a0600,
+	0xa96f30bc, 0x163138aa, 0xe38dee4d, 0xb0fb0e4e,
+]
 
 // Digest represents the partial evaluation of a checksum.
 struct Digest {
@@ -42,14 +38,11 @@ fn (mut d Digest) init() {
 
 // reset the state of the Digest `d`
 pub fn (mut d Digest) reset() {
-	d.s[0] = u32(init0)
-	d.s[1] = u32(init1)
-	d.s[2] = u32(init2)
-	d.s[3] = u32(init3)
-	d.s[4] = u32(init4)
-	d.s[5] = u32(init5)
-	d.s[6] = u32(init6)
-	d.s[7] = u32(init7)
+	mut i := 0
+	for i < 8 {
+		d.s[i] = init_box[i]
+		i += 1
+	}
 	d.nx = 0
 	d.len = 0
 }
