@@ -25,7 +25,7 @@ fn block_generic(mut d Digest, b []u8) {
 
 	mut i := 0
 	for i < 4 {
-		w[i] = binary.big_endian_u32(b[i * 4 .. i * 4 + 4])
+		w[i] = binary.big_endian_u32(b[i * 4 ..])
 		i += 1
 	}
 

@@ -38,10 +38,8 @@ fn (mut d Digest) init() {
 
 // reset the state of the Digest `d`
 pub fn (mut d Digest) reset() {
-	mut i := 0
-	for i < 8 {
+	for i := 0; i < 8; i += 1 {
 		d.s[i] = init_box[i]
-		i += 1
 	}
 	d.nx = 0
 	d.len = 0
